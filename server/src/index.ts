@@ -10,6 +10,7 @@ const allowlist = [
 	'http://localhost:5173',
 	'https://cric-studio-git-master-vman1907s-projects.vercel.app/',
 	'https://cric-studio-iao04cxl3-vman1907s-projects.vercel.app/',
+	'https://cric-studio.vercel.app/',
 ];
 
 const corsOptionsDelegate = (req: any, callback: any) => {
@@ -33,7 +34,6 @@ const corsOptionsDelegate = (req: any, callback: any) => {
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
 
-// MongoDB Connection
 mongoose
 	.connect(process.env.DB_URL ?? '')
 	.then(() => console.log('MongoDB connected'))
