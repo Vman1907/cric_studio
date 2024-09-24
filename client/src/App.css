@@ -1,0 +1,14 @@
+body {
+	font-family: 'Montserrat', sans-serif !important;
+	font-optical-sizing: auto;
+}
+
+.hidden-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
