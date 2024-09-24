@@ -5,6 +5,10 @@ import mongoose from 'mongoose';
 import routes from './routes';
 
 dotenv.config();
+const corsConfig = {
+	credentials: true,
+	origin: true,
+};
 
 // const allowlist = [
 // 	'http://localhost:5173',
@@ -42,7 +46,7 @@ mongoose
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsConfig));
 
 // Routes
 app.use('/api', routes);
