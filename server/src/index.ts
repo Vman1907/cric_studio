@@ -1,10 +1,16 @@
 import cors from 'cors';
+import dotenv from 'dotenv';
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import routes from './routes';
-require('dotenv').config();
 
-const allowlist = ['http://localhost:5173'];
+dotenv.config();
+
+const allowlist = [
+	'http://localhost:5173',
+	'https://cric-studio-git-master-vman1907s-projects.vercel.app/',
+	'https://cric-studio-iao04cxl3-vman1907s-projects.vercel.app/',
+];
 
 const corsOptionsDelegate = (req: any, callback: any) => {
 	let corsOptions;
