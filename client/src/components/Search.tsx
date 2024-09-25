@@ -1,4 +1,4 @@
-import { ChevronDownIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, CloseIcon } from '@chakra-ui/icons';
 import {
 	Badge,
 	Box,
@@ -14,12 +14,14 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
 import DataService from '../services/data.service';
+import SearchResults from './SearchResults';
 
 export default function Search() {
 	const toast = useToast();
 	const [type, setType] = useState<'Domestic' | 'International'>('Domestic');
 	const [value, { toggle }] = useBoolean();
 	const [search, setSearch] = useState<string>('');
+	const [fetchingResults, setFetchingResults] = useState<boolean>(false);
 
 	const [results, setResults] = useState<
 		{
@@ -86,6 +88,7 @@ export default function Search() {
 
 	const fetchResults = useCallback(
 		async (keyword: string) => {
+			setFetchingResults(true);
 			const data = await DataService.search(keyword);
 			if (!data) {
 				return toast({
@@ -95,6 +98,7 @@ export default function Search() {
 				});
 			}
 			setResults(data);
+			setFetchingResults(false);
 		},
 		[toast]
 	);
@@ -154,9 +158,14 @@ export default function Search() {
 					placeholder={'Search a product'}
 				/>
 				<InputRightAddon>
-					<SearchIcon />
+					<CloseIcon onClick={() => setSearch('')} />
 				</InputRightAddon>
 			</InputGroup>
+			<SearchResults
+				fetchingResults={fetchingResults}
+				results={results}
+				handleAddProduct={handleAddProduct}
+			/>
 			<Flex mt={'0.5rem'} gap={'0.5rem'} overflowX={'auto'} className='hidden-scrollbar'>
 				{selectedProducts.map((product, index) => (
 					<Badge
@@ -180,22 +189,7 @@ export default function Search() {
 					</Badge>
 				))}
 			</Flex>
-			<Flex
-				direction={'column'}
-				gap={'1rem'}
-				mt={'1rem'}
-				bgColor={'gray.100'}
-				p={'1rem'}
-				rounded={'md'}
-				my={'0.5rem'}
-				hidden={results.length === 0}
-			>
-				{results.map((result, index) => (
-					<Box key={index} onClick={() => handleAddProduct(result)}>
-						<Text fontWeight={'bold'}>{result.Name}</Text>
-					</Box>
-				))}
-			</Flex>
+
 			<Flex direction={'column'} gap={'1rem'} mt={'1rem'}>
 				{selectedProducts.map((product, index) => (
 					<Flex key={index} borderWidth={'1px'} borderColor={'black'} rounded={'lg'}>

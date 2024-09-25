@@ -18,18 +18,20 @@ export default function Navbar({ setPage }: { setPage: (page: string) => void })
 	const btnRef = React.useRef<HTMLButtonElement>(null);
 
 	return (
-		<nav>
-			<div className='flex flex-row w-full bg-black items-center'>
-				<IconButton
-					aria-label='menu'
-					icon={<HamburgerIcon className='!text-white' />}
-					className='bg-transparent'
-					variant={'ghost'}
-					ref={btnRef}
-					onClick={onOpen}
-				/>
-				<Text className='text-white mx-auto font-bold'>CRICSTUDIO</Text>
-			</div>
+		<nav className='w-screen bg-black items-center py-4 relative text-center'>
+			<IconButton
+				left={0}
+				top={2}
+				bottom={0}
+				position={'absolute'}
+				aria-label='menu'
+				icon={<HamburgerIcon className='!text-white' />}
+				className='bg-transparent'
+				variant={'ghost'}
+				ref={btnRef}
+				onClick={onOpen}
+			/>
+			<Text className='text-white mx-auto font-bold'>CRICSTUDIO</Text>
 			<Drawer isOpen={isOpen} size={'xs'} placement='left' onClose={onClose} finalFocusRef={btnRef}>
 				<DrawerOverlay />
 				<DrawerContent>

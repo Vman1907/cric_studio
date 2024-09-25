@@ -8,7 +8,7 @@ function App() {
 	const [page, setPage] = useState('home');
 
 	return (
-		<main className='max-w-md w-full mx-auto'>
+		<main className='w-screen'>
 			<Navbar setPage={setPage} />
 			{page === 'home' ? <Search /> : <Upload />}
 		</main>
