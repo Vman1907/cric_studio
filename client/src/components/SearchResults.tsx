@@ -45,7 +45,7 @@ export default function SearchResults({
 
 	return (
 		<Flex
-			maxHeight={'600px'}
+			maxHeight={'300px'}
 			overflowY={'auto'}
 			direction={'column'}
 			gap={'1rem'}
