@@ -29,7 +29,15 @@ export default function SearchResults({
 }) {
 	if (fetchingResults) {
 		return (
-			<Box mt={'1rem'} bgColor={'gray.100'} p={'1rem'} rounded={'md'} my={'0.5rem'}>
+			<Box
+				mt={'1rem'}
+				bgColor={'gray.100'}
+				p={'1rem'}
+				rounded={'md'}
+				my={'0.5rem'}
+				fontWeight={'bold'}
+				textAlign={'center'}
+			>
 				Loading ...
 			</Box>
 		);
@@ -46,8 +54,12 @@ export default function SearchResults({
 			p={'1rem'}
 			rounded={'md'}
 			my={'0.5rem'}
-			hidden={results.length === 0}
 		>
+			{results.length === 0 && (
+				<Text fontWeight={'bold'} textAlign={'center'}>
+					No results found
+				</Text>
+			)}
 			{results.map((result, index) => (
 				<Flex gap={2} key={index} onClick={() => handleAddProduct(result)}>
 					<Text>{index + 1}. </Text>

@@ -25,7 +25,6 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
 			fileRows.push(data);
 		})
 		.on('end', async () => {
-
 			const { valid, errors } = validateData(fileRows);
 			if (!valid) {
 				return res.status(400).json({ errors });
@@ -49,11 +48,13 @@ router.get('/search', async (req: Request, res: Response) => {
 		if (!keyword) {
 			return res.status(400).json({ error: 'Keyword is required' });
 		}
+
+		// Use a single regex that searches for the entire keyword (characters match)
+		const regex = new RegExp(keyword as string, 'i');
+
+		// Find products where the keyword matches any part of the Name or SKU
 		const products = await ProductModel.find({
-			$or: [
-				{ Name: { $regex: keyword, $options: 'i' } },
-				{ SKU: { $regex: keyword, $options: 'i' } },
-			],
+			$or: [{ Name: { $regex: regex } }, { SKU: { $regex: regex } }],
 		});
 
 		return res.json({ results: products });
