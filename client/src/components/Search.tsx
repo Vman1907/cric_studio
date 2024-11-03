@@ -13,6 +13,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
 import DataService from '../services/data.service';
+import { Product } from '../types/Product';
 import SearchResults from './SearchResults';
 import SelectedResults from './SelectedResults';
 
@@ -23,43 +24,12 @@ export default function Search() {
 	const [search, setSearch] = useState<string>('');
 	const [fetchingResults, setFetchingResults] = useState<boolean>(false);
 
-	const [results, setResults] = useState<
-		{
-			Company: string;
-			Discount: string;
-			DomesticMRP: string;
-			InternationalMRP: string;
-			MRP: string;
-			Name: string;
-			Quantity: string;
-			SKU: string;
-		}[]
-	>([]);
+	const [results, setResults] = useState<Product[]>([]);
 
-	const [selectedProducts, setSelectedProducts] = useState<
-		{
-			Company: string;
-			Discount: string;
-			DomesticMRP: string;
-			InternationalMRP: string;
-			MRP: string;
-			Name: string;
-			Quantity: string;
-			SKU: string;
-		}[]
-	>([]);
+	const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
 
-	const handleAddProduct = (product: {
-		Company: string;
-		Discount: string;
-		DomesticMRP: string;
-		InternationalMRP: string;
-		MRP: string;
-		Name: string;
-		Quantity: string;
-		SKU: string;
-	}) => {
-		if (selectedProducts.find((p) => p.SKU === product.SKU)) {
+	const handleAddProduct = (product: Product) => {
+		if (selectedProducts.find((p) => p.Sku === product.Sku)) {
 			toast({
 				title: 'Error',
 				description: 'Product already added',
@@ -70,17 +40,8 @@ export default function Search() {
 		setSelectedProducts([...selectedProducts, product]);
 	};
 
-	const handleRemoveProduct = (product: {
-		Company: string;
-		Discount: string;
-		DomesticMRP: string;
-		InternationalMRP: string;
-		MRP: string;
-		Name: string;
-		Quantity: string;
-		SKU: string;
-	}) => {
-		const newProducts = selectedProducts.filter((p) => p.SKU !== product.SKU);
+	const handleRemoveProduct = (product: Product) => {
+		const newProducts = selectedProducts.filter((p) => p.Sku !== product.Sku);
 		setSelectedProducts(newProducts);
 	};
 

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Product } from '../types/Product';
 import api from '../utils/api';
 
 export default class DataService {
@@ -24,18 +26,7 @@ export default class DataService {
 	static async search(keyword: string) {
 		try {
 			const { data } = await api.get('/api/search', { params: { keyword } });
-			return (data.results ?? []).map((result: any) => {
-				return {
-					Company: result.Company ?? '-',
-					Discount: result.Discount ?? '-',
-					DomesticMRP: result.DomesticMRP ?? '-',
-					InternationalMRP: result.InternationalMRP ?? '-',
-					MRP: result.MRP ?? '-',
-					Name: result.Name ?? '-',
-					Quantity: result.Quantity ?? '-',
-					SKU: result.SKU ?? '-',
-				};
-			});
+			return (data.results ?? []) as Product[];
 		} catch (err: any) {
 			return null;
 		}

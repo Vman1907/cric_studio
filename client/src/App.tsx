@@ -7,6 +7,8 @@ import Upload from './components/Upload';
 function App() {
 	const [page, setPage] = useState('home');
 
+	console.log(import.meta.env.VITE_SERVER_URL);
+
 	return (
 		<main className='w-screen'>
 			<Navbar setPage={setPage} />

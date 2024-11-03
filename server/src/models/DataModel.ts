@@ -1,45 +1,65 @@
 import { Schema, model } from 'mongoose';
 
 interface IProduct {
-	SKU: string;
-	Name: string;
-	Quantity: string;
-	Company: string;
-	Discount: string;
-	MRP: string;
-	DomesticMRP: string;
-	InternationalMRP: string;
+	Sku: string;
+	Brand: string;
+	department: string;
+	itemName: string;
+	mrp: string;
+	standrate: string;
+	dcode: string;
+	ahdStore: string;
+	mrtStore: string;
+	ahdWH: string;
+	mrtWH: string;
+	domesticRate: string;
+	internationalRate: string;
 }
 
 const productSchema = new Schema<IProduct>({
-	SKU: {
-		type: 'String',
-		unique: true,
+	Sku: {
+		type: String,
+		
 	},
-	Name: {
-		type: 'String',
+	Brand: {
+		type: String,
 	},
-	Quantity: {
-		type: 'String',
+	department: {
+		type: String,
 	},
-	Company: {
-		type: 'String',
+	itemName: {
+		type: String,
 	},
-	Discount: {
-		type: 'String',
-		default: '0',
+	mrp: {
+		type: String,
 	},
-	MRP: {
+	standrate: {
+		type: String,
+	},
+	dcode: {
+		type: String,
+	},
+	ahdStore: {
 		type: String,
 		default: '0',
 	},
-	DomesticMRP: {
-		type: 'String',
+	mrtStore: {
+		type: String,
 		default: '0',
 	},
-	InternationalMRP: {
-		type: 'String',
+	ahdWH: {
+		type: String,
 		default: '0',
+	},
+	mrtWH: {
+		type: String,
+		default: '0',
+	},
+	domesticRate: {
+		type: String,
+	},
+	internationalRate: {
+		type: String,
 	},
 });
 

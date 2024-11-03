@@ -1,17 +1,24 @@
 export const validateData = (data: any[]): { valid: boolean; errors: string[] } => {
-	//check if all the columns are string type only
 	const errors: string[] = [];
 	const headers = Object.keys(data[0]);
 	const requiredHeaders = [
-		'Name',
-		'SKU',
-		'MRP',
-		'Company',
-		'Quantity',
-		'DomesticMRP',
-		'InternationalMRP',
-		'Discount',
+		'Sku',
+		'Brand',
+		'department',
+		'itemName',
+		'mrp',
+		'standrate',
+		'dcode',
+		'ahdStore',
+		'mrtStore',
+		'ahdWH',
+		'mrtWH',
+		'total',
+		'domesticRate',
+		'internationalRate',
 	];
+
+	console.log(data[0]);
 
 	const missingHeaders = requiredHeaders.filter((header) => !headers.includes(header));
 	if (missingHeaders.length) {

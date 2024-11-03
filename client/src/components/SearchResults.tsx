@@ -1,4 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
+import { Product } from '../types/Product';
 
 export default function SearchResults({
 	results,
@@ -6,26 +7,8 @@ export default function SearchResults({
 	fetchingResults,
 }: {
 	fetchingResults: boolean;
-	results: {
-		Company: string;
-		Discount: string;
-		DomesticMRP: string;
-		InternationalMRP: string;
-		MRP: string;
-		Name: string;
-		Quantity: string;
-		SKU: string;
-	}[];
-	handleAddProduct: (product: {
-		Company: string;
-		Discount: string;
-		DomesticMRP: string;
-		InternationalMRP: string;
-		MRP: string;
-		Name: string;
-		Quantity: string;
-		SKU: string;
-	}) => void;
+	results: Product[];
+	handleAddProduct: (product: Product) => void;
 }) {
 	if (fetchingResults) {
 		return (
@@ -63,7 +46,7 @@ export default function SearchResults({
 			{results.map((result, index) => (
 				<Flex gap={2} key={index} onClick={() => handleAddProduct(result)}>
 					<Text>{index + 1}. </Text>
-					<Text fontWeight={'bold'}>{result.Name}</Text>
+					<Text fontWeight={'bold'}>{result.itemName}</Text>
 				</Flex>
 			))}
 		</Flex>

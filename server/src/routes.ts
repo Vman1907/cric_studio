@@ -25,12 +25,14 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
 			fileRows.push(data);
 		})
 		.on('end', async () => {
+			// console.log(fileRows);
 			const { valid, errors } = validateData(fileRows);
 			if (!valid) {
 				return res.status(400).json({ errors });
 			}
 
 			try {
+				console.log(fileRows);
 				await ProductModel.deleteMany({});
 				await ProductModel.insertMany(fileRows);
 				return res.json({ success: true });
@@ -54,7 +56,7 @@ router.get('/search', async (req: Request, res: Response) => {
 
 		// Find products where the keyword matches any part of the Name or SKU
 		const products = await ProductModel.find({
-			$or: [{ Name: { $regex: regex } }, { SKU: { $regex: regex } }],
+			$or: [{ itemName: { $regex: regex } }, { Sku: { $regex: regex } }],
 		});
 
 		return res.json({ results: products });
