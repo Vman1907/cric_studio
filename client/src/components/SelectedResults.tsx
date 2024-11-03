@@ -69,7 +69,12 @@ export default function SelectedResults({
 							<Text>{product.mrtStore === '' ? '-' : product.mrtStore}</Text>
 							<Text>{product.ahdWH === '' ? '-' : product.ahdWH}</Text>
 							<Text>{product.mrtWH === '' ? '-' : product.mrtWH}</Text>
-							<Text>{Number(product.ahdStore) + Number(product.mrtStore)}</Text>
+							<Text>
+								{Number(product.ahdStore) +
+									Number(product.mrtStore) +
+									Number(product.ahdWH) +
+									Number(product.mrtWH)}
+							</Text>
 							{type === 'Domestic' && (
 								<Text>{product.domesticRate === '' ? '-' : product.domesticRate}</Text>
 							)}
